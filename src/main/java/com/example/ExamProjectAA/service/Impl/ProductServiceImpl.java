@@ -1,11 +1,13 @@
 package com.example.ExamProjectAA.service.Impl;
 
+import com.example.ExamProjectAA.exception.ResourceNotFoundException;
 import com.example.ExamProjectAA.model.Product;
 import com.example.ExamProjectAA.repository.ProductRepository;
 import com.example.ExamProjectAA.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -25,12 +27,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findByName(String name) {
-        return null;
+        return productRepository.findByName(name).orElseThrow(()-> new ResourceNotFoundException(String.format("Make ti, nemavo stringo %s", name)));
     }
 
     @Override
     public Product findById(Long id) {
-        return null;
+        return productRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(String.format("Make ti, nemavo idto  %d", id)));
     }
 
     @Override
@@ -40,11 +42,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(Long id) {
-
+        Product foundProduct = findById(id);
+        productRepository.delete(foundProduct);
     }
 
     @Override
     public Set<Product> findAll() {
-        return null;
+        return new HashSet<>(productRepository.findAll());
     }
 }

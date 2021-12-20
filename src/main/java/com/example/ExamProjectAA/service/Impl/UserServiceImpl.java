@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(String.format("Make ti, nemavo stringo %d", id)));
+        return userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(String.format("Make ti, nemavo idto %d", id)));
     }
 
     @Override
