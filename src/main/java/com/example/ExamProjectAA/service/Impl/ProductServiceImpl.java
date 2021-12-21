@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product save(Product product) {
-        return null;
+        return productRepository.save(product);
     }
 
     @Override
@@ -37,7 +37,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product update(Product product, Long id) {
-        return null;
+        Product foundProduct = findById(id);
+        Product toUpdate = Product.builder()
+                .id(foundProduct.getId())
+                .name(product.getName())
+                .description(product.getDescription())
+                .price(product.getPrice())
+                .build();
+        return save(toUpdate);
     }
 
     @Override

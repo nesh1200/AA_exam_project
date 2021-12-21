@@ -10,7 +10,6 @@ public interface CartService {
     Cart findById(Long id);
     Cart update(Cart cart, Long id);
     Set<Cart> findAll();
-
-    void clear(Long cart_id, Long user_id);
+    Cart clear(Long cart_id, Long user_id);
 
 }
